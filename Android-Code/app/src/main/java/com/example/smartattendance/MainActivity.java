@@ -63,11 +63,12 @@ public class MainActivity extends AppCompatActivity {
         userRegistration.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(MainActivity.this, RegistrationActivity.class));
+                startActivity(new Intent(MainActivity.this, RegistrationadminActivity.class));
             }
         });
 
     }
+
 
     private void validate(String userName, String userPassword) {
 

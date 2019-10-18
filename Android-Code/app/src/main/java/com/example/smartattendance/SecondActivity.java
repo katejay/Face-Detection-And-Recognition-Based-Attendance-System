@@ -14,6 +14,7 @@ import androidx.appcompat.app.ActionBarDrawerToggle;
 import android.view.MenuItem;
 
 import com.google.android.material.navigation.NavigationView;
+import com.google.firebase.auth.FirebaseAuth;
 
 import androidx.drawerlayout.widget.DrawerLayout;
 
@@ -21,14 +22,33 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
 import android.view.Menu;
+import android.widget.Button;
 
 public class SecondActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
+
+    private FirebaseAuth firebaseAuth;
+    private Button logout;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_second);
+
+        firebaseAuth = FirebaseAuth.getInstance();
+        logout = (Button)findViewById(R.id.btnLogout);
+        logout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                firebaseAuth.signOut();
+                finish();
+                startActivity(new Intent(SecondActivity.this, MainActivity.class));
+            }
+        });
+
+
+
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         FloatingActionButton fab = findViewById(R.id.fab);
@@ -105,7 +125,7 @@ public class SecondActivity extends AppCompatActivity
         return true;
     }
 
-    private void ThirdActivity(){
+    public void retriveData(View view){
             Intent intent = new Intent(SecondActivity.this, ThirdActivity.class);
             startActivity(intent);
     }
