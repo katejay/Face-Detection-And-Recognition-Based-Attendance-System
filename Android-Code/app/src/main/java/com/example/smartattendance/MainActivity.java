@@ -52,7 +52,6 @@ public class MainActivity extends AppCompatActivity {
             startActivity(new Intent(MainActivity.this, SecondActivity.class));
         }
 
-
         Login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -68,7 +67,6 @@ public class MainActivity extends AppCompatActivity {
         });
 
     }
-
 
     private void validate(String userName, String userPassword) {
 
