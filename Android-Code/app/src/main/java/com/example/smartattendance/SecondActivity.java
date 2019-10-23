@@ -129,4 +129,9 @@ public class SecondActivity extends AppCompatActivity
             Intent intent = new Intent(SecondActivity.this, ThirdActivity.class);
             startActivity(intent);
     }
+
+    public void fetchData(View view){
+        Intent intent = new Intent(SecondActivity.this, FetchActivity.class);
+        startActivity(intent);
+    }
 }

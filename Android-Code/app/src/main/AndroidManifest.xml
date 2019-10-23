@@ -12,14 +12,16 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".RegistrationadminActivity"></activity>
+        <activity android:name=".FetchActivity"></activity>
+        <activity android:name=".RegistrationadminActivity" />
         <activity android:name=".ThirdActivity" />
         <activity android:name=".RegistrationActivity" />
         <activity
             android:name=".SecondActivity"
             android:label="@string/title_activity_second"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".MainActivity"
+        <activity
+            android:name=".MainActivity"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

@@ -48,7 +48,7 @@
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="72dp"
         android:background="@drawable/buttonstyleblack"
-        android:onClick="retriveData"
+        android:onClick="fetchData"
         android:text="Day Wise"
         android:textColor="#FF000000"
         android:textSize="32dp"
