@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorPrimaryDark">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/textView10"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Learn More"
+            android:textStyle="bold"
+            android:textColor="#fff"
+            android:gravity="center"
+            android:layout_marginTop="40dp"
+            android:textSize="30dp"/>
+
+        <TextView
+            android:id="@+id/textView12"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="      Face recognition is an important application of Image processing owing to its
+use in many fields. Identification of individuals in any organization for the purpose of
+attendance is one such application of face recognition. Maintenance and monitoring of
+attendance records plays a vital role in the analysis of performance of any organization.
+The purpose of developing attendance management system is to computerize the
+traditional way of taking attendance. Automated Attendance Management System
+performs the daily activities of attendance marking with reduced human intervention.
+Although many different algorithms exist to perform face detection, each has its own
+weaknesses and strengths. Some use flesh tones, some use contours, and other are
+even more complex involving templates, neural networks, or filters. These algorithms
+suffer from the same problem; they are computationally expensive. An image is only a
+collection of color or light intensity values. Analyzing these pixels for face detection is
+time consuming and difficult to accomplish because of the wide variations of shape and
+"
+            android:textColor="#fff"
+            android:layout_margin="30dp"
+            android:textSize="22dp"/>
+
+
+        <TextView
+            android:id="@+id/textView13"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="      In this system we tend to use Haar Classifier provided by OpenCV (Opensource
+Computer Vision), Object Detection using Haar feature-based cascade classifiers is an
+effective object detection method proposed by Paul Viola and Michael Jones. It is a
+machine learning based approach where a cascade function is trained from a lot of
+positive and negative images. OpenCV provides both trainer as well as detector which
+makes the integration of the Face Recognition system easier. The system will mark the
+attendance within the the excel sheet and the following excel sheet will be uploaded on
+to the Google Firebase Cloud system so the same uploaded data can also be accessed
+by other authorized users via Android application."
+            android:textColor="#fff"
+            android:layout_margin="30dp"
+            android:textSize="22dp"/>
+    </LinearLayout>
+</ScrollView>

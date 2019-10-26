@@ -70,6 +70,17 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
+    public void learnMore(View view){
+        Intent intent = new Intent(MainActivity.this, LearnMoreActivity.class);
+        startActivity(intent);
+    }
+
+
+    public void aboutUs(View view){
+        Intent intent = new Intent(MainActivity.this, AboutUsActivity.class);
+        startActivity(intent);
+    }
+
     private void validate(String userName, String userPassword) {
 
         progressDialog.setMessage("Please Wait");

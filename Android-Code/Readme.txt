@@ -42,3 +42,9 @@ What's New ⏺
 2) Firebase Storage [Add]
 
 ---------------------------
+
+V 0.5 :-
+What's New ⏺
+1) File Retrieve Code [Add]
+
+---------------------------

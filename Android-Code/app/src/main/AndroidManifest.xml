@@ -3,6 +3,9 @@
     xmlns:dist="http://schemas.android.com/apk/distribution"
     package="com.example.smartattendance">
 
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+
     <dist:module dist:instant="true" />
 
     <application
@@ -12,7 +15,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".FetchActivity"></activity>
+        <activity android:name=".AboutUsActivity"></activity>
+        <activity android:name=".LearnMoreActivity" />
+        <activity android:name=".FetchActivity" />
         <activity android:name=".RegistrationadminActivity" />
         <activity android:name=".ThirdActivity" />
         <activity android:name=".RegistrationActivity" />
