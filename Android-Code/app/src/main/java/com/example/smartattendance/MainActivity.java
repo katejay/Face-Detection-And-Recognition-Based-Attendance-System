@@ -20,8 +20,7 @@ import com.google.firebase.auth.FirebaseUser;
 
 public class MainActivity extends AppCompatActivity {
 
-    private EditText Name;
-    private EditText Password;
+    private EditText Name, Password;
     private Button Login;
     private TextView Info;
     private int counter = 5;
@@ -52,7 +51,6 @@ public class MainActivity extends AppCompatActivity {
             startActivity(new Intent(MainActivity.this, SecondActivity.class));
         }
 
-
         Login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -68,7 +66,6 @@ public class MainActivity extends AppCompatActivity {
         });
 
     }
-
 
     public void learnMore(View view){
         Intent intent = new Intent(MainActivity.this, LearnMoreActivity.class);

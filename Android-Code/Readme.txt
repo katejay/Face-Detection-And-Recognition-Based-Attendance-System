@@ -48,3 +48,10 @@ What's New ⏺
 1) File Retrieve Code [Add]
 
 ---------------------------
+
+V 0.6 :-
+What's New ⏺
+1) Quick Fix - Firebase Storage [Fix]
+2) Minor Changes [Change]
+
+---------------------------

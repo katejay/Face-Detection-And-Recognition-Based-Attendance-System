@@ -1,13 +1,18 @@
 package com.example.smartattendance;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 
 import android.view.View;
 
+import androidx.annotation.Nullable;
 import androidx.core.view.GravityCompat;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 
@@ -15,6 +20,12 @@ import android.view.MenuItem;
 
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.OnProgressListener;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
 
 import androidx.drawerlayout.widget.DrawerLayout;
 
@@ -23,27 +34,57 @@ import androidx.appcompat.widget.Toolbar;
 
 import android.view.Menu;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.Toast;
 
 public class SecondActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
-    private FirebaseAuth firebaseAuth;
-    private Button logout;
+    FirebaseAuth firebaseAuth;
+    EditText etFileName;
+    Button btnUpload, btnView, logout;
 
+    DatabaseReference databaseReference;
+    StorageReference storageReference;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_second);
 
-        firebaseAuth = FirebaseAuth.getInstance();
         logout = (Button)findViewById(R.id.btnLogout);
+        etFileName = (EditText)findViewById(R.id.etFileName);
+        btnUpload = (Button)findViewById(R.id.btnUpload);
+        btnView = (Button)findViewById(R.id.btnView);
+
+        firebaseAuth = FirebaseAuth.getInstance();
+        databaseReference = FirebaseDatabase.getInstance().getReference("uploads");
+        storageReference = FirebaseStorage.getInstance().getReference();
+
         logout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 firebaseAuth.signOut();
                 finish();
                 startActivity(new Intent(SecondActivity.this, MainActivity.class));
+            }
+        });
+
+        btnUpload.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent();
+                intent.setType("application/pdf");
+                intent.setAction(Intent.ACTION_GET_CONTENT);
+                startActivityForResult(Intent.createChooser(intent,"Please Select File"),1);
+            }
+        });
+
+        btnView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(SecondActivity.this, ViewFile.class);
+                startActivity(intent);
             }
         });
 
@@ -125,13 +166,47 @@ public class SecondActivity extends AppCompatActivity
         return true;
     }
 
-    public void retriveData(View view){
-            Intent intent = new Intent(SecondActivity.this, ThirdActivity.class);
-            startActivity(intent);
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if(requestCode == 1 && resultCode == RESULT_OK && data !=null && data.getData()!=null){
+            uploadFile(data.getData());
+        }
     }
 
-    public void fetchData(View view){
-        Intent intent = new Intent(SecondActivity.this, FetchActivity.class);
-        startActivity(intent);
+    private void uploadFile(Uri data) {
+
+        final ProgressDialog progressDialog = new ProgressDialog(this);
+        progressDialog.setTitle("Uploading");
+        progressDialog.show();
+
+        StorageReference reference = storageReference.child("uploads/" + System.currentTimeMillis() + ".pdf");
+        reference.putFile(data)
+                .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                    @Override
+                    public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+
+                        Task<Uri> uri = taskSnapshot.getStorage().getDownloadUrl();
+                        while (!uri.isComplete()) ;
+                        Uri url = uri.getResult();
+
+                        UploadFile uploadFile = new UploadFile(etFileName.getText().toString(), url.toString());
+                        databaseReference.child(databaseReference.push().getKey()).setValue(uploadFile);
+                        Toast.makeText(SecondActivity.this, "File Uploaded", Toast.LENGTH_SHORT).show();
+                        progressDialog.dismiss();
+
+                    }
+                }).addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
+            @Override
+            public void onProgress(UploadTask.TaskSnapshot taskSnapshot) {
+
+                double progress = (100.0 * taskSnapshot.getBytesTransferred()) / taskSnapshot.getTotalByteCount();
+                progressDialog.setMessage("Upload : " + (int) progress + "%");
+
+            }
+        });
     }
+
 }

@@ -15,11 +15,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".AboutUsActivity"></activity>
+        <activity android:name=".ViewFile"></activity>
+        <activity android:name=".AboutUsActivity" />
         <activity android:name=".LearnMoreActivity" />
-        <activity android:name=".FetchActivity" />
         <activity android:name=".RegistrationadminActivity" />
-        <activity android:name=".ThirdActivity" />
         <activity android:name=".RegistrationActivity" />
         <activity
             android:name=".SecondActivity"
